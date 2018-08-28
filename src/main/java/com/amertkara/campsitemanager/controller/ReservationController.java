@@ -5,6 +5,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.util.UriComponentsBuilder.fromPath;
 
 import com.amertkara.campsitemanager.controller.dto.ReservationDTO;
+import com.amertkara.campsitemanager.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,27 +21,27 @@ import javax.validation.Valid;
 public class ReservationController {
 	static final String RESERVATIONS_PATH = "/reservations";
 
+	private final ReservationService reservationService;
+
 	@PutMapping(consumes = APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> create(@Valid @RequestBody ReservationDTO reservationDTO) {
 		log.debug("Received a create request for a reservation, payload={}", reservationDTO);
-		// ReservationDTO reservation = reservationService.saveOrUpdate(reservationDTO);
+		String reservationUuid = reservationService.saveOrUpdate(reservationDTO);
 		log.debug("Created the reservation reservationUuid={}", reservationDTO.getUuid());
-		// return ResponseEntity.created(fromPath(RESERVATIONS_PATH).pathSegment(reservation.getUuid()).build().toUri()).build();
-		return ResponseEntity.created(fromPath(RESERVATIONS_PATH).pathSegment(reservationDTO.getUuid()).build().toUri()).build();
+		return ResponseEntity.created(fromPath(RESERVATIONS_PATH).pathSegment(reservationUuid).build().toUri()).build();
 	}
 
 	@GetMapping(path = "/{reservationUuid}")
 	public ResponseEntity<ReservationDTO> get(@PathVariable String reservationUuid) {
 		log.debug("Received a get request for the reservation reservationUuid={}", reservationUuid);
-		// return ResponseEntity.ok(reservationService.get(reservationUuid));
-		return ResponseEntity.ok(null);
+		return ResponseEntity.ok(reservationService.get(reservationUuid));
 	}
 
 	@PostMapping(path = "/{reservationUuid}", consumes = APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> update(@PathVariable String reservationUuid, @Valid @RequestBody ReservationDTO reservationDTO) {
 		log.debug("Received an update request for the reservation reservationUuid={}, payload={}", reservationUuid, reservationDTO);
-		// reservationDTO.setUuid(reservationUuid);
-		// reservationService.saveOrUpdate(reservationDTO);
+		reservationDTO.setId(reservationService.get(reservationUuid).getId());
+		reservationService.saveOrUpdate(reservationDTO);
 		log.debug("Updated the reservation reservationUuid={}", reservationUuid);
 		return ResponseEntity.noContent().build();
 	}
@@ -48,7 +49,7 @@ public class ReservationController {
 	@DeleteMapping(path = "/{reservationUuid}")
 	public ResponseEntity<Void> delete(@PathVariable String reservationUuid) {
 		log.debug("Received a delete request for the reservation reservationUuid={}", reservationUuid);
-		// reservationService.delete(reservationUuid);
+		reservationService.delete(reservationUuid);
 		log.debug("Deleted the reservation reservationUuid={}", reservationUuid);
 		return ResponseEntity.noContent().build();
 	}

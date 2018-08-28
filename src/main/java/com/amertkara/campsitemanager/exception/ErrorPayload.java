@@ -18,8 +18,8 @@ public final class ErrorPayload {
 	private final String code;
 	private final String description;
 
-	public static ErrorPayload buildWorkspaceNotFoundPayload(String workspaceId) {
-		return builder().description(format("Workspace with id=%s does not exist", workspaceId)).code(WORKSPACE_NOT_FOUND.name()).build();
+	public static ErrorPayload buildReservationNotFoundPayload(String reservationUuid) {
+		return builder().description(format("Reservation with id=%s does not exist", reservationUuid)).code(RESERVATION_NOT_FOUND.name()).build();
 	}
 
 	public static ErrorPayload buildPayloadNotValidPayload() {
