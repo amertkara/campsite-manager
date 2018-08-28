@@ -51,3 +51,8 @@ databaseChangeLog:
                   type: date
                   constraints:
                     nullable: false
+              - column:
+                  name: duration
+                  type: long
+                  constraints:
+                    nullable: false

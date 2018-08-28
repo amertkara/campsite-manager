@@ -3,6 +3,8 @@ logging:
     .: ERROR
     org.springframework: INFO
     com.amertkara: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
 
 spring:
   profiles:
@@ -19,6 +21,7 @@ spring:
     database-platform: "org.hibernate.dialect.MySQL5Dialect"
     hibernate:
       ddl-auto: none
+
 
 
 ---

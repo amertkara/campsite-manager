@@ -23,11 +23,13 @@ public class ReservationDurationValidator implements ConstraintValidator<CheckRe
 
 		LocalDate arrivalDate = parse(value.getArrivalDate(), ISO_LOCAL_DATE);
 		LocalDate departureDate = parse(value.getDepartureDate(), ISO_LOCAL_DATE);
+		long differenceInDays = Duration.between(arrivalDate.atStartOfDay(), departureDate.atStartOfDay()).toDays();
 
-		if (Duration.between(departureDate.atStartOfDay(), arrivalDate.atStartOfDay()).toDays() > 3) {
+		if (differenceInDays > 3 || differenceInDays <= 0) {
 			log.debug("Reservation duration is invalid arrivalDate={} departureDate={}", value.getArrivalDate(), value.getDepartureDate());
 			throw new InvalidReservationDurationException(buildInvalidReservationDurationPayload());
 		}
+		value.setDuration(differenceInDays);
 
 		return true;
 	}
