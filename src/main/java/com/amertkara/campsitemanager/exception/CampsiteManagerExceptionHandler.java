@@ -1,8 +1,7 @@
 package com.amertkara.campsitemanager.exception;
 
 import static com.amertkara.campsitemanager.exception.ErrorPayload.buildPayloadNotValidPayload;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -27,6 +26,12 @@ public final class CampsiteManagerExceptionHandler extends ResponseEntityExcepti
 	public ResponseEntity<Object> handleBadRequestException(GenericCampsiteManagerException e, WebRequest webRequest) {
 		log.debug("Bad request exception is thrown exceptionMessage={} errorPayload={}", e.getMessage(), e.getErrorPayload());
 		return handleExceptionInternal(e, e.getErrorPayload(), new HttpHeaders(), BAD_REQUEST, webRequest);
+	}
+
+	@ExceptionHandler(OveralappingDatesException.class)
+	public ResponseEntity<Object> handleConflictException(GenericCampsiteManagerException e, WebRequest webRequest) {
+		log.debug("Bad request exception is thrown exceptionMessage={} errorPayload={}", e.getMessage(), e.getErrorPayload());
+		return handleExceptionInternal(e, e.getErrorPayload(), new HttpHeaders(), CONFLICT, webRequest);
 	}
 
 	/**

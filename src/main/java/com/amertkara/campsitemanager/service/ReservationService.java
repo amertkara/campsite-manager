@@ -25,4 +25,11 @@ public interface ReservationService {
 	 * @param reservationUuid
 	 */
 	void delete(String reservationUuid);
+
+	/**
+	 * Returns the total number of reservations for the campsite.
+	 *
+	 * @return
+	 */
+	long count();
 }

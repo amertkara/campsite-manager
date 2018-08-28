@@ -27,7 +27,7 @@ public class ReservationController {
 	public ResponseEntity<Void> create(@Valid @RequestBody ReservationDTO reservationDTO) {
 		log.debug("Received a create request for a reservation, payload={}", reservationDTO);
 		String reservationUuid = reservationService.saveOrUpdate(reservationDTO);
-		log.debug("Created the reservation reservationUuid={}", reservationDTO.getUuid());
+		log.debug("Created the reservation reservationUuid={}", reservationUuid);
 		return ResponseEntity.created(fromPath(RESERVATIONS_PATH).pathSegment(reservationUuid).build().toUri()).build();
 	}
 

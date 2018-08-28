@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @ToString
-@JsonIgnoreProperties(value = {"id"}, allowGetters = true)
+@JsonIgnoreProperties(value = {"id", "duration"}, allowGetters = true)
 @CheckReservationDuration
 public class ReservationDTO implements ValidateableReservation {
 	@JsonIgnore
@@ -34,4 +34,5 @@ public class ReservationDTO implements ValidateableReservation {
 	@NotBlank
 	@CheckDate
 	private String departureDate;
+	private Long duration;
 }
