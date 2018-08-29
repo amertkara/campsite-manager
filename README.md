@@ -1,5 +1,5 @@
 ```
-TODO: There is a problem with my Tavis account, couldn't configure the travis builds for this repo
+TODO: There is a problem with my Travis account, couldn't configure the travis builds for this repo
 ```
 
 # CAMPSITE MANAGER APPLICATION
