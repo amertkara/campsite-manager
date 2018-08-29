@@ -53,7 +53,7 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	@Transactional
 	public List<ReservationDTO> getReservations(Date startDate, Date endDate) {
-		return mapperFactory.getMapperFacade().mapAsList(reservationRepository.getOverlappingReservations(startDate, endDate), ReservationDTO.class);
+		return mapperFactory.getMapperFacade().mapAsList(reservationRepository.getByArrivalDateGreaterThanAndDepartureDateLessThan(startDate, endDate), ReservationDTO.class);
 	}
 
 }

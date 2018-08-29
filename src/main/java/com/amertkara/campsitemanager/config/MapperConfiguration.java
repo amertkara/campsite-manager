@@ -1,5 +1,7 @@
 package com.amertkara.campsitemanager.config;
 
+import static com.amertkara.campsitemanager.config.ServiceConstants.DATE_FORMAT;
+
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.converter.builtin.DateToStringConverter;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
@@ -13,7 +15,7 @@ public class MapperConfiguration {
 	@Bean
 	public MapperFactory mapperFactory() {
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-		mapperFactory.getConverterFactory().registerConverter(new DateToStringConverter("yyyy-MM-dd", Locale.US));
+		mapperFactory.getConverterFactory().registerConverter(new DateToStringConverter(DATE_FORMAT, Locale.US));
 		return mapperFactory;
 	}
 }

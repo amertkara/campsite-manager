@@ -1,5 +1,6 @@
 package com.amertkara.campsitemanager.controller;
 
+import static com.amertkara.campsitemanager.config.ServiceConstants.DATE_FORMAT;
 import static com.amertkara.campsitemanager.controller.ReservationController.RESERVATIONS_PATH;
 import static com.amertkara.campsitemanager.controller.dto.util.DateParser.toLocalDate;
 import static com.amertkara.campsitemanager.exception.ErrorCode.*;
@@ -47,7 +48,7 @@ public class ReservationControllerIT extends AbstractTestNGSpringContextTests {
 	private static final String DEPARTURE_DATE_JSON_PATH = "$.departureDate";
 	private static final String ID_JSON_PATH = "$.id";
 	private static final String DURATION_JSON_PATH = "$.duration";
-	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
 
 	@Autowired
 	private MockMvc mockMvc;
