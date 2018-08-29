@@ -98,7 +98,7 @@ Date
 
 ## Campsite API
 
-###Get Campsite Availability
+### Get Campsite Availability
 * URL: /campsite
 * Method: GET
 * Response Status: 200 OK
