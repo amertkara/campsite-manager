@@ -22,6 +22,17 @@ It is a CRUD API that manages reservations.
 * Response Status: 201 Created
 * Response Payload: **Returns the path to the reservation in Location header**
 
+**Curl Example**
+```
+curl -X PUT --data '{"fullName": "Alex Ferguson", "email": "alex@gmail.com", "arrivalDate":"2018-09-17", "departureDate": "2018-09-20"}' localhost:8080/reservations -i -H "Content-Type: application/json"
+```
+```
+HTTP/1.1 201
+Location: /reservations/0983b3f6-9d93-4c2a-a981-257310d8d420
+Content-Length: 0
+Date: Wed, 29 Aug 2018 03:50:15 GMT
+```
+
 ###### GET Reservation
 * URL: /reservations/{reservationId}
 * Method: GET
@@ -38,6 +49,14 @@ It is a CRUD API that manages reservations.
 }
 ```
 
+**Curl Example**
+```
+curl localhost:8080/reservations/0983b3f6-9d93-4c2a-a981-257310d8d420
+```
+```
+{"email":"alex@gmail.com","fullName":"Alex Ferguson","arrivalDate":"2018-09-17","departureDate":"2018-09-20","duration":3,"id":"0983b3f6-9d93-4c2a-a981-257310d8d420"}%
+```
+
 ###### Update Reservation
 * URL: /reservations/{reservationId}
 * Method: POST
@@ -52,10 +71,30 @@ It is a CRUD API that manages reservations.
 ```
 * Response Status: 204 No Content
 
+**Curl Example**
+```
+curl -X POST --data '{"fullName": "Alex Ferguson", "email": "alex@gmail.com", "arrivalDate":"2018-09-18", "departureDate": "2018-09-20"}' localhost:8080/reservations/0983b3f6-9d93-4c2a-a981-257310d8d420 -i -H "Content-Type: application/json"
+
+```
+```
+HTTP/1.1 204
+Date: Wed, 29 Aug 2018 03:55:59 GMT
+```
+
 ###### Delete Reservation
 * URL: /reservations/{reservationId}
 * Method: DELETE
 * Response Status: 204 No Content
+
+**Curl Example**
+```
+curl DELETE localhost:8080/reservations/0983b3f6-9d93-4c2a-a981-257310d8d420 -i
+
+```
+```
+HTTP/1.1 204
+Date
+```
 
 ##### Campsite API
 
@@ -72,6 +111,19 @@ It is a CRUD API that manages reservations.
     ],
     "available": true
 }
+```
+
+**Curl Example**
+```
+curl localhost:8080/campsite -i
+```
+```
+HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Wed, 29 Aug 2018 03:58:55 GMT
+
+{"availableDays":22,"unavailableDates":["(2018-09-11,2018-09-14)","(2018-09-20,2018-09-22)","(2018-09-17,2018-09-20)"],"available":true}%
 ```
 
 ##### Setup
