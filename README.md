@@ -1,3 +1,7 @@
+```
+TODO: There is a problem with my Tavis account, couldn't configure the travis builds for this repo
+```
+
 # CAMPSITE MANAGER APPLICATION
 An application for reservations for a campsite. It allows users for creating reservations however there are some rules:
 * A reservation can be made minimum 1 day and maximum 30 days before the arrival date

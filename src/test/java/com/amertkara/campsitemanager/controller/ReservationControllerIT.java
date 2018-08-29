@@ -16,18 +16,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.amertkara.campsitemanager.controller.dto.ReservationDTO;
 import com.amertkara.campsitemanager.controller.dto.fixture.ReservationDTOFixture;
-import com.amertkara.campsitemanager.model.repository.ReservationRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;
@@ -40,6 +39,7 @@ import java.util.Date;
 @AutoConfigureMockMvc
 @EnableAutoConfiguration
 @WebAppConfiguration
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ReservationControllerIT extends AbstractTestNGSpringContextTests {
 	private static final String ERROR_CODE_JSON_PATH = "$.errorCode";
 	private static final String FULL_NAME_JSON_PATH = "$.fullName";
@@ -53,13 +53,7 @@ public class ReservationControllerIT extends AbstractTestNGSpringContextTests {
 	@Autowired
 	private MockMvc mockMvc;
 	@Autowired
-	private ReservationRepository reservationRepository;
 	private ObjectMapper objectMapper = new ObjectMapper();
-
-	@AfterMethod
-	public void afterMethod() {
-		reservationRepository.deleteAll();
-	}
 
 	@Test
 	public void testCreate_givenPayloadMissingFullName_shouldReturnBadRequest() throws Exception {
