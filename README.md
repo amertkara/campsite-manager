@@ -1,13 +1,13 @@
-#### CAMPSITE MANAGER APPLICATION
+# CAMPSITE MANAGER APPLICATION
 An application for reservations for a campsite. It allows users for creating reservations however there are some rules:
 * A reservation can be made minimum 1 day and maximum 30 days before the arrival date
 * A reservation can only be for 3 days
 * Overlapping dates are not allowed
 
-##### Reservation API
+## Reservation API
 It is a CRUD API that manages reservations.
 
-###### Create Reservation
+### Create Reservation
 * URL: /reservations
 * Method: PUT
 * Request Payload (All fields are required):
@@ -33,7 +33,7 @@ Content-Length: 0
 Date: Wed, 29 Aug 2018 03:50:15 GMT
 ```
 
-###### GET Reservation
+### GET Reservation
 * URL: /reservations/{reservationId}
 * Method: GET
 * Response Status: 200 OK
@@ -57,7 +57,7 @@ curl localhost:8080/reservations/0983b3f6-9d93-4c2a-a981-257310d8d420
 {"email":"alex@gmail.com","fullName":"Alex Ferguson","arrivalDate":"2018-09-17","departureDate":"2018-09-20","duration":3,"id":"0983b3f6-9d93-4c2a-a981-257310d8d420"}%
 ```
 
-###### Update Reservation
+### Update Reservation
 * URL: /reservations/{reservationId}
 * Method: POST
 * Request Payload (All fields are required):
@@ -81,7 +81,7 @@ HTTP/1.1 204
 Date: Wed, 29 Aug 2018 03:55:59 GMT
 ```
 
-###### Delete Reservation
+### Delete Reservation
 * URL: /reservations/{reservationId}
 * Method: DELETE
 * Response Status: 204 No Content
@@ -96,9 +96,9 @@ HTTP/1.1 204
 Date
 ```
 
-##### Campsite API
+## Campsite API
 
-###### Get Campsite Availability
+###Get Campsite Availability
 * URL: /campsite
 * Method: GET
 * Response Status: 200 OK
@@ -126,12 +126,12 @@ Date: Wed, 29 Aug 2018 03:58:55 GMT
 {"availableDays":22,"unavailableDates":["(2018-09-11,2018-09-14)","(2018-09-20,2018-09-22)","(2018-09-17,2018-09-20)"],"available":true}%
 ```
 
-##### Setup
+## Setup
 ```
 mvn package
 ```
 
-##### Running
+## Running
 ```
 cd target
 java -jar campsite-manager-0.0.1-SNAPSHOT.jar
