@@ -134,5 +134,11 @@ mvn package
 ## Running
 ```
 cd target
+java -jar -Dspring.profiles.active=dev-h2 campsite-manager-0.0.1-SNAPSHOT.jar
+```
+
+Alternatively, you can have mysql running in localhost:3306 with a database named `campsitemanager`. The default spring profile targets a mysql instance.
+```
 java -jar campsite-manager-0.0.1-SNAPSHOT.jar
 ```
+
