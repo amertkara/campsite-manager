@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(value = RESERVATIONS_PATH, produces = APPLICATION_JSON_VALUE)
 public class ReservationController {
-	static final String RESERVATIONS_PATH = "/reservations";
+	public static final String RESERVATIONS_PATH = "/reservations";
 
 	private final ReservationService reservationService;
 

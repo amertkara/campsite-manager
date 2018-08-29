@@ -1,8 +1,7 @@
 package com.amertkara.campsitemanager.controller.dto.validation;
 
+import static com.amertkara.campsitemanager.controller.dto.util.DateParser.toLocalDate;
 import static com.amertkara.campsitemanager.exception.ErrorPayload.buildInvalidReservationDurationPayload;
-import static java.time.LocalDate.parse;
-import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static org.apache.commons.lang3.StringUtils.isAnyBlank;
 
 import com.amertkara.campsitemanager.exception.InvalidReservationDurationException;
@@ -21,8 +20,8 @@ public class ReservationDurationValidator implements ConstraintValidator<CheckRe
 			return true;
 		}
 
-		LocalDate arrivalDate = parse(value.getArrivalDate(), ISO_LOCAL_DATE);
-		LocalDate departureDate = parse(value.getDepartureDate(), ISO_LOCAL_DATE);
+		LocalDate arrivalDate = toLocalDate(value.getArrivalDate());
+		LocalDate departureDate = toLocalDate(value.getDepartureDate());
 		long differenceInDays = Duration.between(arrivalDate.atStartOfDay(), departureDate.atStartOfDay()).toDays();
 
 		if (differenceInDays > 3 || differenceInDays <= 0) {
@@ -30,7 +29,7 @@ public class ReservationDurationValidator implements ConstraintValidator<CheckRe
 			throw new InvalidReservationDurationException(buildInvalidReservationDurationPayload());
 		}
 		value.setDuration(differenceInDays);
-
+		log.debug("Setting the duration as {}", differenceInDays);
 		return true;
 	}
 }

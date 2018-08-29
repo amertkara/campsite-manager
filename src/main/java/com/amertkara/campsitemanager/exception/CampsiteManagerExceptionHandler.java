@@ -28,7 +28,7 @@ public final class CampsiteManagerExceptionHandler extends ResponseEntityExcepti
 		return handleExceptionInternal(e, e.getErrorPayload(), new HttpHeaders(), BAD_REQUEST, webRequest);
 	}
 
-	@ExceptionHandler(OveralappingDatesException.class)
+	@ExceptionHandler(OverlappingDatesException.class)
 	public ResponseEntity<Object> handleConflictException(GenericCampsiteManagerException e, WebRequest webRequest) {
 		log.debug("Bad request exception is thrown exceptionMessage={} errorPayload={}", e.getMessage(), e.getErrorPayload());
 		return handleExceptionInternal(e, e.getErrorPayload(), new HttpHeaders(), CONFLICT, webRequest);

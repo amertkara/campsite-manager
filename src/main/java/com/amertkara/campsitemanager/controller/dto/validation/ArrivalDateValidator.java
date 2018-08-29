@@ -1,7 +1,7 @@
 package com.amertkara.campsitemanager.controller.dto.validation;
 
+import static com.amertkara.campsitemanager.controller.dto.util.DateParser.toLocalDate;
 import static com.amertkara.campsitemanager.exception.ErrorPayload.buildInvalidArrivalDatePayload;
-import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
 import com.amertkara.campsitemanager.exception.InvalidArrivalDateException;
@@ -21,7 +21,7 @@ public class ArrivalDateValidator implements ConstraintValidator<CheckArrivalDat
 			return true;
 		}
 
-		long diffFromToday = Duration.between(LocalDate.now().atTime(LocalTime.now()), LocalDate.parse(value, ISO_LOCAL_DATE).atStartOfDay()).toDays();
+		long diffFromToday = Duration.between(LocalDate.now().atTime(LocalTime.now()), toLocalDate(value).atStartOfDay()).toDays();
 		if (diffFromToday < 1L || diffFromToday > 30L) {
 			log.debug("Invalid Arrival date is provided arrivalDate={}", value);
 			throw new InvalidArrivalDateException(buildInvalidArrivalDatePayload());
