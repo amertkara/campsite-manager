@@ -23,10 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;
@@ -37,6 +37,7 @@ import java.util.Date;
 @AutoConfigureMockMvc
 @EnableAutoConfiguration
 @WebAppConfiguration
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class CampsiteControllerIT extends AbstractTestNGSpringContextTests {
 	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
 	private static final String IS_AVAILABLE_JSON_PATH = "$.available";
@@ -48,11 +49,6 @@ public class CampsiteControllerIT extends AbstractTestNGSpringContextTests {
 	@Autowired
 	private ReservationRepository reservationRepository;
 	private ObjectMapper objectMapper = new ObjectMapper();
-
-	@AfterMethod
-	public void afterMethod() {
-		reservationRepository.deleteAll();
-	}
 
 	@Test
 	public void testGet_givenOneMonthRange_shouldGetAvailability() throws Exception {
