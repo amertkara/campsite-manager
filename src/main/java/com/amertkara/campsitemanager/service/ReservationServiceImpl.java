@@ -4,7 +4,7 @@ import static com.amertkara.campsitemanager.exception.ErrorPayload.buildOverlapp
 
 import com.amertkara.campsitemanager.controller.dto.ReservationDTO;
 import com.amertkara.campsitemanager.exception.ErrorPayload;
-import com.amertkara.campsitemanager.exception.OveralappingDatesException;
+import com.amertkara.campsitemanager.exception.OverlappingDatesException;
 import com.amertkara.campsitemanager.exception.ReservationDoesNotExistException;
 import com.amertkara.campsitemanager.model.Reservation;
 import com.amertkara.campsitemanager.model.repository.ReservationRepository;
@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -28,9 +29,11 @@ public class ReservationServiceImpl implements ReservationService {
 	@Transactional
 	public String saveOrUpdate(ReservationDTO reservationDTO) {
 		Reservation reservation = mapperFactory.getMapperFacade().map(reservationDTO, Reservation.class);
-		List<ReservationDTO> overlappingReservations = mapperFactory.getMapperFacade().mapAsList(reservationRepository.getOverlappingReservations(reservation.getArrivalDate(), reservation.getDepartureDate()), ReservationDTO.class);
-		if (!overlappingReservations.isEmpty()) {
-			throw new OveralappingDatesException(buildOverlappingDatesPayload(overlappingReservations));
+		if (reservationDTO.getId() == null) {
+			List<ReservationDTO> overlappingReservations = mapperFactory.getMapperFacade().mapAsList(reservationRepository.getOverlappingReservations(reservation.getArrivalDate(), reservation.getDepartureDate()), ReservationDTO.class);
+			if (!overlappingReservations.isEmpty()) {
+				throw new OverlappingDatesException(buildOverlappingDatesPayload(overlappingReservations));
+			}
 		}
 		return reservationRepository.save(reservation).getUuid();
 	}
@@ -48,7 +51,9 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public long count() {
-		return reservationRepository.count();
+	@Transactional
+	public List<ReservationDTO> getReservations(Date startDate, Date endDate) {
+		return mapperFactory.getMapperFacade().mapAsList(reservationRepository.getOverlappingReservations(startDate, endDate), ReservationDTO.class);
 	}
+
 }

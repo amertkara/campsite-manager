@@ -14,9 +14,20 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
 	void deleteByUuid(String uuid);
 
+	/**
+	 * This method gets overlapping dates for a given date range
+	 * <p>
+	 * Custom SQL is used instead of repository syntax to avoid too long method name
+	 *
+	 * @param arrivalDate
+	 * @param departureDate
+	 * @return
+	 */
 	@Query(value = "select r from Reservation r where " +
 			"(arrival_date > :arrivalDate and arrival_date < :departureDate) or " +
 			"(departure_date > :arrivalDate and departure_date < :departureDate) or " +
 			"(arrival_date = :arrivalDate and departure_date = :departureDate)")
 	List<Reservation> getOverlappingReservations(@Param("arrivalDate") Date arrivalDate, @Param("departureDate") Date departureDate);
+
+	List<Reservation> getByArrivalDateGreaterThanAndDepartureDateLessThan(Date startDate, Date endDate);
 }

@@ -2,6 +2,9 @@ package com.amertkara.campsitemanager.service;
 
 import com.amertkara.campsitemanager.controller.dto.ReservationDTO;
 
+import java.util.Date;
+import java.util.List;
+
 public interface ReservationService {
 	/**
 	 * Creates a reservation in the database for a given payload.
@@ -27,9 +30,11 @@ public interface ReservationService {
 	void delete(String reservationUuid);
 
 	/**
-	 * Returns the total number of reservations for the campsite.
+	 * Returns the reservations for a date range.
 	 *
+	 * @param startDate beginning of the range
+	 * @param endDate end of the range
 	 * @return
 	 */
-	long count();
+	List<ReservationDTO> getReservations(Date startDate, Date endDate);
 }
