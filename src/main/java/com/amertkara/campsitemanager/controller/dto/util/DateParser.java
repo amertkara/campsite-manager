@@ -1,5 +1,6 @@
 package com.amertkara.campsitemanager.controller.dto.util;
 
+import static com.amertkara.campsitemanager.config.ServiceConstants.DATE_FORMAT;
 import static com.amertkara.campsitemanager.exception.ErrorPayload.buildInvalidDateFormatPayload;
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 
@@ -16,7 +17,7 @@ public class DateParser {
 			return LocalDate.parse(date, ISO_LOCAL_DATE);
 		} catch (DateTimeParseException e) {
 			log.debug("Error while parsing a date string", e);
-			throw new InvalidDateFormatException(buildInvalidDateFormatPayload(date, "yyyy-mm-dd"));
+			throw new InvalidDateFormatException(buildInvalidDateFormatPayload(date, DATE_FORMAT));
 		}
 	}
 }

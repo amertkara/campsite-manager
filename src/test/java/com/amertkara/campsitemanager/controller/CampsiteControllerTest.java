@@ -1,5 +1,6 @@
 package com.amertkara.campsitemanager.controller;
 
+import static com.amertkara.campsitemanager.config.ServiceConstants.DATE_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -16,7 +17,7 @@ import java.time.Instant;
 import java.util.Date;
 
 public class CampsiteControllerTest {
-	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
 
 	@Mock
 	private ReservationService reservationService;

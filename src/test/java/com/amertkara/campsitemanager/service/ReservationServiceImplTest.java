@@ -124,6 +124,6 @@ public class ReservationServiceImplTest {
 		when(mapperFacade.mapAsList(anyList(), eq(ReservationDTO.class))).thenReturn(reservations);
 
 		assertThat(reservationService.getReservations(startDate, endDate)).hasSameElementsAs(reservations);
-		verify(reservationRepository).getOverlappingReservations(eq(startDate), eq(endDate));
+		verify(reservationRepository).getByArrivalDateGreaterThanAndDepartureDateLessThan(eq(startDate), eq(endDate));
 	}
 }

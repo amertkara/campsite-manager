@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.com/amertkara/campsite-manager.svg?branch=master)](https://travis-ci.com/amertkara/campsite-manager)
-
 #### CAMPSITE MANAGER APPLICATION
 An application for reservations for a campsite. It allows users for creating reservations however there are some rules:
 * A reservation can be made minimum 1 day and maximum 30 days before the arrival date

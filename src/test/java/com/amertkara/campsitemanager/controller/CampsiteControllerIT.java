@@ -1,5 +1,6 @@
 package com.amertkara.campsitemanager.controller;
 
+import static com.amertkara.campsitemanager.config.ServiceConstants.DATE_FORMAT;
 import static com.amertkara.campsitemanager.controller.CampsiteController.CAMPSITE_PATH;
 import static com.amertkara.campsitemanager.controller.ReservationController.RESERVATIONS_PATH;
 import static org.hamcrest.Matchers.hasSize;
@@ -37,7 +38,7 @@ import java.util.Date;
 @EnableAutoConfiguration
 @WebAppConfiguration
 public class CampsiteControllerIT extends AbstractTestNGSpringContextTests {
-	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
 	private static final String IS_AVAILABLE_JSON_PATH = "$.available";
 	private static final String IS_AVAILABLE_DAYS_JSON_PATH = "$.availableDays";
 	private static final String UNAVAILABLE_DATES_JSON_PATH = "$.unavailableDates";

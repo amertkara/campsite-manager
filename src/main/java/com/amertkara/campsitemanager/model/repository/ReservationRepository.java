@@ -26,6 +26,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 	@Query(value = "select r from Reservation r where " +
 			"(arrival_date > :arrivalDate and arrival_date < :departureDate) or " +
 			"(departure_date > :arrivalDate and departure_date < :departureDate) or " +
+			"(arrival_date < :arrivalDate and departure_date > :departureDate) or " +
+			"(arrival_date > :arrivalDate and departure_date < :departureDate) or " +
+			"(arrival_date = :arrivalDate or departure_date = :departureDate) or " +
 			"(arrival_date = :arrivalDate and departure_date = :departureDate)")
 	List<Reservation> getOverlappingReservations(@Param("arrivalDate") Date arrivalDate, @Param("departureDate") Date departureDate);
 
