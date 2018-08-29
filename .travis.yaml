@@ -3,5 +3,9 @@ language: java
 jdk:
   - oraclejdk8
 
+branches:
+  except:
+  - gh-pages
+
 script:
   - "mvn test"
