@@ -29,7 +29,6 @@ java -jar campsite-manager-0.0.1-SNAPSHOT.jar
 ```
 mvn clean package docker:build
 docker-compose up
-
 ```
 
 ## APIs
