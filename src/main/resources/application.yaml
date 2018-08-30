@@ -33,3 +33,16 @@ spring:
     database-platform: "org.hibernate.dialect.H2Dialect"
     hibernate:
       ddl-auto: none
+---
+spring:
+  profiles: docker-mysql
+  datasource:
+    url: "jdbc:mysql://mysql:3306/campsitemanager?useSSL=false"
+    username: "root"
+    password: "root"
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database-platform: "org.hibernate.dialect.MySQL5Dialect"
+    hibernate:
+      ddl-auto: none
+---
