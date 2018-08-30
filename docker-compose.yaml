@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  campsite-manager:
+    image: amertkara/campsite-manager:latest
+    ports:
+     - "8080:8080"
+    depends_on:
+      - "mysql"
+    environment:
+      WAIT_HOSTS: mysql:3306
+  mysql:
+    image: mysql:5.7
+    ports:
+     - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "campsitemanager"
+      MYSQL_ROOT_PASSWORD: "root"
