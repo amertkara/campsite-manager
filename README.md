@@ -116,7 +116,7 @@ Date: Wed, 29 Aug 2018 03:55:59 GMT
 
 **Curl Example**
 ```
-curl DELETE localhost:8080/reservations/0983b3f6-9d93-4c2a-a981-257310d8d420 -i
+curl -X DELETE localhost:8080/reservations/0983b3f6-9d93-4c2a-a981-257310d8d420 -i
 
 ```
 ```
